@@ -24,6 +24,8 @@ metric format.
 - **Dashboard**: metric cards (added / removed / growth / churn / modifications /
   modification frequency / churn rate), activity chart, sortable authors /
   files / directories tables with ownership and main-author info.
+- **Persistent light and dark themes** with a responsive technical command-centre
+  interface; the selected theme is remembered in the browser.
 - **CSV export** (`/api/repos/{id}/export.csv`) in the exact 15-column reference
   format, honouring all active filters.
 

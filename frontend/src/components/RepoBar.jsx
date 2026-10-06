@@ -7,6 +7,8 @@ export default function RepoBar({
   activeId,
   analysis,
   busy,
+  theme,
+  onThemeToggle,
   onSelect,
   onAdd,
   onDelete,
@@ -18,10 +20,13 @@ export default function RepoBar({
   return (
     <header className="topbar">
       <div className="brand">
-        <span className="brand-mark">RAT</span>
+        <span className="brand-mark" aria-hidden="true">RAT</span>
         <div className="brand-text">
           <h1>Repo Analysis Tool</h1>
-          <p className="muted">Repository metrics · filters · author merging · CSV export</p>
+          <p className="system-line">
+            <span className="status-dot" aria-hidden="true" />
+            SYS.ONLINE // GIT INTELLIGENCE
+          </p>
         </div>
       </div>
 
@@ -44,6 +49,16 @@ export default function RepoBar({
         </button>
         <button className="btn btn-primary" disabled={!active || busy} onClick={onExport}>
           Export CSV
+        </button>
+        <button
+          className="btn theme-toggle"
+          onClick={onThemeToggle}
+          aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+          aria-pressed={theme === "light"}
+          title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+        >
+          <span aria-hidden="true">{theme === "dark" ? "☼" : "◐"}</span>
+          {theme === "dark" ? "LIGHT" : "DARK"}
         </button>
         <button
           className="btn btn-danger"

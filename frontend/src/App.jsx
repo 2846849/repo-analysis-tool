@@ -1,4 +1,11 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 
 import { api, exportUrl } from "./api";
 import AddRepoModal from "./components/AddRepoModal";
@@ -18,7 +25,14 @@ const DEFAULT_FILTERS = {
   top: 250,
 };
 
+function initialTheme() {
+  const saved = window.localStorage.getItem("rat-theme");
+  if (saved === "light" || saved === "dark") return saved;
+  return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+}
+
 export default function App() {
+  const [theme, setTheme] = useState(initialTheme);
   const [repos, setRepos] = useState([]);
   const [activeId, setActiveId] = useState(null);
   const [filters, setFilters] = useState(DEFAULT_FILTERS);
@@ -40,6 +54,11 @@ export default function App() {
   }, [analysis]);
 
   const activeRepo = repos.find((r) => r.id === activeId) || null;
+
+  useLayoutEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    window.localStorage.setItem("rat-theme", theme);
+  }, [theme]);
 
   const notify = useCallback((text, type = "info") => {
     setToast({ text, type, at: Date.now() });
@@ -204,6 +223,8 @@ export default function App() {
         activeId={activeId}
         analysis={analysis}
         busy={busy}
+        theme={theme}
+        onThemeToggle={() => setTheme((current) => (current === "dark" ? "light" : "dark"))}
         onSelect={setActiveId}
         onAdd={() => setShowAdd(true)}
         onDelete={handleDelete}
