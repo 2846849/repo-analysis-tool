@@ -54,7 +54,7 @@ metric format.
 ### 2. Clone and start
 
 ```bash
-git clone <repository-url> repo-analysis-tool
+git clone https://github.com/2846849/repo-analysis-tool repo-analysis-tool
 cd repo-analysis-tool
 ./run.sh
 ```
