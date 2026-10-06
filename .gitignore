@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# App runtime data (databases, cached histories, imported repositories)
+backend/storage/
+
+# Verification clones of the reference repositories (large)
+verification/clones/
+
+# Generated verification artifacts (scratch repos, exports, logs, screenshots)
+verification/scratch-dbg/
+verification/verification_run.log
+verification/dashboard_smoke.png
+
+# Node
+node_modules/
+frontend/dist/
+.npm-cache/
+npm-debug.log*
+
+# Editors / OS
+.DS_Store
+.idea/
+.vscode/
+*.swp
